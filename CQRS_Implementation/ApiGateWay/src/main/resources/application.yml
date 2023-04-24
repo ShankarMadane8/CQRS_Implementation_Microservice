@@ -1,0 +1,41 @@
+
+server:
+  port: 8084
+
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: optional:configserver:http://localhost:8083
+  cloud:
+    gateway:
+      routes:
+      - id: USER-SERVICE
+        uri: lb://USER-SERVICE
+        predicates:
+        - Path=/student/**
+        
+      - id: CONTACT-SERVICE
+        uri: lb://CONTACT-SERVICE
+        predicates:
+        - Path=/address/**
+      
+       
+        
+          
+          
+  
+      
+    
+
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      default-zone: http://localhost:8761/eureka
+
+
